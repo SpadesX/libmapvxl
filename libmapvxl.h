@@ -13,7 +13,7 @@ typedef struct {
 
 void mapvxlLoadVXL(MapVxl *map, unsigned char *v);
 unsigned char mapvxlIsSurface(MapVxl *map, int x, int y, int z);
-void mapvxlSetColor(MapVxl *map, int x, int y, int z, unsigned int c)
+void mapvxlSetColor(MapVxl *map, int x, int y, int z, unsigned int c);
 void mapvxlWriteMap(MapVxl *map, unsigned char *mapOut);
 unsigned int mapvxlGetColor(MapVxl *map, int x, int y, int z);
 void mapvxlSetAir(MapVxl *map, int x, int y, int z);
