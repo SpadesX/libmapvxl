@@ -1,17 +1,17 @@
 #include <assert.h>
 #include "libmapvxl.h"
 
-static void setBlock(Map *map, int x, int y, int z, int t) {
+static void setBlock(MapVxl *map, int x, int y, int z, int t) {
    assert(z >= 0 && z < 64);
    map->blocks[x][y][z] = t;
 }
 
-static void setColor(Map *map, int x, int y, int z, unsigned int c) {
+static void setColor(MapVxl *map, int x, int y, int z, unsigned int c) {
    assert(z >= 0 && z < 64);
    map->color[x][y][z] = c;
 }
 
-void mapvxlLoadVXL(Map *map, unsigned char *v) {
+void mapvxlLoadVXL(MapVxl *map, unsigned char *v) {
     int x,y,z;
     for (y=0; y < 512; ++y) {
         for (x=0; x < 512; ++x) {
@@ -63,7 +63,7 @@ void mapvxlLoadVXL(Map *map, unsigned char *v) {
     }
 }
 
-unsigned char mapvxlIsSurface(Map *map, int x, int y, int z) {
+unsigned char mapvxlIsSurface(MapVxl *map, int x, int y, int z) {
    if (map->blocks[x][y][z]==0) return 0;
    if (x   >   0 && map->blocks[x-1][y][z]==0) return 1;
    if (x+1 < 512 && map->blocks[x+1][y][z]==0) return 1;
@@ -86,7 +86,7 @@ void mapvxlWriteColor(unsigned char **mapOut, unsigned int color) {
 }
 
 
-void mapvxlWriteMap(Map *map, unsigned char *mapOut) {
+void mapvxlWriteMap(MapVxl *map, unsigned char *mapOut) {
    int i,j,k;
 
    for (j=0; j < MAP_X_MAX; ++j) {
@@ -172,19 +172,19 @@ void mapvxlWriteMap(Map *map, unsigned char *mapOut) {
    }
 }
 
-unsigned int mapvxlGetColor(Map *map, int x, int y, int z) {
+unsigned int mapvxlGetColor(MapVxl *map, int x, int y, int z) {
     if (map->blocks[x][y][z] == 0) {
         return DEFAULT_COLOR;
     }
     return map->color[x][y][z];
 }
 
-void mapvxlSetAir(Map *map, int x, int y, int z) {
+void mapvxlSetAir(MapVxl *map, int x, int y, int z) {
     map->blocks[x][y][z] = 0;
     map->color[x][y][z] = 0;
 }
 
-unsigned char mapvxlIsSolid(Map *map, int x, int y, int z) {
+unsigned char mapvxlIsSolid(MapVxl *map, int x, int y, int z) {
     unsigned char ret = map->blocks[x][y][z];
     if (ret > 1 || ret < 0) {
         return 2; //Error case

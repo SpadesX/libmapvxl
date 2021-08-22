@@ -9,14 +9,14 @@
 typedef struct {
     unsigned char blocks[MAP_X_MAX][MAP_Y_MAX][MAP_Z_MAX];
     unsigned int color[MAP_X_MAX][MAP_Y_MAX][MAP_Z_MAX];
-} Map;
+} MapVxl;
 
-void mapvxlLoadVXL(Map *map, unsigned char *v);
-unsigned char mapvxlIsSurface(Map *map, int x, int y, int z);
+void mapvxlLoadVXL(MapVxl *map, unsigned char *v);
+unsigned char mapvxlIsSurface(MapVxl *map, int x, int y, int z);
 void mapvxlWriteColor(unsigned char **mapOut, unsigned int color);
-void mapvxlWriteMap(Map *map, unsigned char *mapOut);
-unsigned int mapvxlGetColor(Map *map, int x, int y, int z);
-void mapvxlSetAir(Map *map, int x, int y, int z);
-unsigned char mapvxlIsSolid(Map *map, int x, int y, int z);
+void mapvxlWriteMap(MapVxl *map, unsigned char *mapOut);
+unsigned int mapvxlGetColor(MapVxl *map, int x, int y, int z);
+void mapvxlSetAir(MapVxl *map, int x, int y, int z);
+unsigned char mapvxlIsSolid(MapVxl *map, int x, int y, int z);
 
 #endif
