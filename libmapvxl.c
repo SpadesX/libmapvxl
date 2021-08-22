@@ -182,7 +182,7 @@ unsigned int mapvxlGetColor(MapVxl *map, int x, int y, int z) {
 
 void mapvxlSetAir(MapVxl *map, int x, int y, int z) {
     map->blocks[x][y][z] = 0;
-    map->color[x][y][z] = 0;
+    map->color[x][y][z] = DEFAULT_COLOR;
 }
 
 unsigned char mapvxlIsSolid(MapVxl *map, int x, int y, int z) {
