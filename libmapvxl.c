@@ -18,6 +18,7 @@ void mapvxlLoadVXL(MapVxl *map, unsigned char *v) {
         for (x=0; x < 512; ++x) {
             for (z=0; z < 64; ++z) {
                 setBlock(map, x,y,z,1);
+                mapvxlSetColor(map, x,y,z, DEFAULT_COLOR);
             }
             z = 0;
             while(1) {
