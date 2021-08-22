@@ -35,7 +35,7 @@ void mapvxlLoadVXL(MapVxl *map, unsigned char *v) {
 
                 color = (unsigned int *) (v+4);
                 for(z=top_color_start; z <= top_color_end; z++)
-                    setColor(map, x,y,z,*color++);
+                    mapvxlSetColor(map, x,y,z,*color++);
 
                 len_bottom = top_color_end - top_color_start + 1;
 
@@ -56,7 +56,7 @@ void mapvxlLoadVXL(MapVxl *map, unsigned char *v) {
                 bottom_color_start = bottom_color_end - len_top;
 
                 for(z=bottom_color_start; z < bottom_color_end; ++z) {
-                    setColor(map, x,y,z,*color++);
+                    mapvxlSetColor(map, x,y,z,*color++);
                 }
             }
         }
