@@ -6,7 +6,7 @@ static void setBlock(MapVxl *map, int x, int y, int z, int t) {
    map->blocks[x][y][z] = t;
 }
 
-static void setColor(MapVxl *map, int x, int y, int z, unsigned int c) {
+void mapvxlSetColor(MapVxl *map, int x, int y, int z, unsigned int c) {
    assert(z >= 0 && z < 64);
    map->color[x][y][z] = c;
 }
@@ -74,7 +74,7 @@ unsigned char mapvxlIsSurface(MapVxl *map, int x, int y, int z) {
    return 0;
 }
 
-void mapvxlWriteColor(unsigned char **mapOut, unsigned int color) {
+static void mapvxlWriteColor(unsigned char **mapOut, unsigned int color) {
    // assume color is ARGB native, but endianness is unknown
 
    // file format endianness is ARGB little endian, i.e. B,G,R,A
