@@ -9,6 +9,7 @@ static void setBlock(MapVxl *map, int x, int y, int z, int t) {
 void mapvxlSetColor(MapVxl *map, int x, int y, int z, unsigned int c) {
    assert(z >= 0 && z < 64);
    map->color[x][y][z] = c;
+   map->blocks[x][y][z] = 1;
 }
 
 void mapvxlLoadVXL(MapVxl *map, unsigned char *v) {
