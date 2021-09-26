@@ -188,8 +188,8 @@ void mapvxlSetAir(MapVxl *map, int x, int y, int z) {
 
 unsigned char mapvxlIsSolid(MapVxl *map, int x, int y, int z) {
     unsigned char ret = map->blocks[x][y][z];
-    if (ret > 1 || ret < 0) {
-        return 2; //Error case
+    if (ret > 1) {
+       return 1;
     }
     return ret;
 }
