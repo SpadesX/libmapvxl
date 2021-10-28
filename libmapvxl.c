@@ -12,6 +12,15 @@ void mapvxlSetColor(MapVxl *map, int x, int y, int z, unsigned int c) {
    map->blocks[x][y][z] = 1;
 }
 
+unsigned char mapvxlFindTopAir(MapVxl *map, int x, int y) {
+   for (int z = 63; z >= 0; --z) {
+      if (map->blocks[x][y][z] == 0) {
+         return z;
+      }
+   }
+   return 0;
+}
+
 void mapvxlLoadVXL(MapVxl *map, unsigned char *v) {
     int x,y,z;
     for (y=0; y < 512; ++y) {
