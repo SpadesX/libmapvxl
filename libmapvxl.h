@@ -18,6 +18,6 @@ void mapvxlWriteMap(MapVxl *map, unsigned char *mapOut);
 unsigned int mapvxlGetColor(MapVxl *map, int x, int y, int z);
 void mapvxlSetAir(MapVxl *map, int x, int y, int z);
 unsigned char mapvxlIsSolid(MapVxl *map, int x, int y, int z);
-unsigned char mapvxlFindTopAir(MapVxl *map, int x, int y);
+unsigned char mapvxlFindTopBlock(MapVxl *map, int x, int y);
 
 #endif
