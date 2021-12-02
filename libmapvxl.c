@@ -2,18 +2,18 @@
 #include "libmapvxl.h"
 
 static void setBlock(MapVxl *map, int x, int y, int z, int t) {
-   assert(z >= 0 && z < 64);
+   assert(z >= 0 && z < MAP_Z_MAX);
    map->blocks[x][y][z] = t;
 }
 
 void mapvxlSetColor(MapVxl *map, int x, int y, int z, unsigned int c) {
-   assert(z >= 0 && z < 64);
+   assert(z >= 0 && z < MAP_Z_MAX);
    map->color[x][y][z] = c;
    map->blocks[x][y][z] = 1;
 }
 
 unsigned char mapvxlFindTopBlock(MapVxl *map, int x, int y) {
-   for (int z = 63; z >= 0; --z) {
+   for (int z = MAP_Z_MAX - 1; z >= 0; --z) {
       if (map->blocks[x][y][z] == 0) {
          return z + 1; //We are on air block and we want to return the top solid block
       }
@@ -23,9 +23,9 @@ unsigned char mapvxlFindTopBlock(MapVxl *map, int x, int y) {
 
 void mapvxlLoadVXL(MapVxl *map, unsigned char *v) {
     int x,y,z;
-    for (y=0; y < 512; ++y) {
-        for (x=0; x < 512; ++x) {
-            for (z=0; z < 64; ++z) {
+    for (y=0; y < MAP_Y_MAX; ++y) {
+        for (x=0; x < MAP_X_MAX; ++x) {
+            for (z=0; z < MAP_Z_MAX; ++z) {
                 setBlock(map, x,y,z,1);
                 mapvxlSetColor(map, x,y,z, DEFAULT_COLOR);
             }
@@ -77,11 +77,11 @@ void mapvxlLoadVXL(MapVxl *map, unsigned char *v) {
 unsigned char mapvxlIsSurface(MapVxl *map, int x, int y, int z) {
    if (map->blocks[x][y][z]==0) return 0;
    if (x   >   0 && map->blocks[x-1][y][z]==0) return 1;
-   if (x+1 < 512 && map->blocks[x+1][y][z]==0) return 1;
+   if (x+1 < MAP_X_MAX && map->blocks[x+1][y][z]==0) return 1;
    if (y   >   0 && map->blocks[x][y-1][z]==0) return 1;
-   if (y+1 < 512 && map->blocks[x][y+1][z]==0) return 1;
+   if (y+1 < MAP_Y_MAX && map->blocks[x][y+1][z]==0) return 1;
    if (z   >   0 && map->blocks[x][y][z-1]==0) return 1;
-   if (z+1 <  64 && map->blocks[x][y][z+1]==0) return 1;
+   if (z+1 <  MAP_Z_MAX && map->blocks[x][y][z+1]==0) return 1;
    return 0;
 }
 
