@@ -13,9 +13,9 @@ void mapvxlSetColor(MapVxl *map, int x, int y, int z, unsigned int c) {
 }
 
 unsigned char mapvxlFindTopBlock(MapVxl *map, int x, int y) {
-   for (int z = MAP_Z_MAX - 1; z >= 0; --z) {
-      if (map->blocks[x][y][z] == 0) {
-         return z + 1; //We are on air block and we want to return the top solid block
+   for (int z = 0; z <= 63; ++z) {
+      if (map->blocks[x][y][z] == 1) {
+         return z;
       }
    }
    return 0;
