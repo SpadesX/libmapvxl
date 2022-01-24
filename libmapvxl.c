@@ -76,6 +76,7 @@ void mapvxlLoadVXL(MapVxl *map, unsigned char *v) {
 
 unsigned char mapvxlIsSurface(MapVxl *map, int x, int y, int z) {
    if (map->blocks[x][y][z]==0) return 0;
+   if (z == 0) return 1;
    if (x   >   0 && map->blocks[x-1][y][z]==0) return 1;
    if (x+1 < MAP_X_MAX && map->blocks[x+1][y][z]==0) return 1;
    if (y   >   0 && map->blocks[x][y-1][z]==0) return 1;
