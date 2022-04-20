@@ -1,5 +1,8 @@
 #include <assert.h>
+#include <stddef.h>
 #include "libmapvxl.h"
+
+static unsigned long mapSize = 0;
 
 static void setBlock(MapVxl *map, int x, int y, int z, int t) {
    assert(z >= 0 && z < MAP_Z_MAX);
@@ -95,11 +98,19 @@ static void mapvxlWriteColor(unsigned char **mapOut, unsigned int color) {
    (*mapOut)[2] = (color >> 16);
    (*mapOut)[3] = (color >> 24);
    *mapOut += 4;
+   mapSize += 32;
 }
 
 
-void mapvxlWriteMap(MapVxl *map, unsigned char *mapOut) {
+size_t mapvxlWriteMap(MapVxl *map, unsigned char *mapOut) {
    int i,j,k;
+   
+   //The size of mapOut should be the max possible memory size of
+   //uncompressed VXL format in memory given the XYZ size
+   //which is MAP_X_MAX * MAP_Y_MAX * (MAP_Z_MAX / 2) * 8
+   
+   //Reset size to return correct size at the end
+   mapSize = 0;
 
    for (j=0; j < MAP_X_MAX; ++j) {
       for (i=0; i < MAP_Y_MAX; ++i) {
@@ -161,10 +172,12 @@ void mapvxlWriteMap(MapVxl *map, unsigned char *mapOut) {
             if (k == MAP_Z_MAX) {
                *mapOut = 0;
                mapOut += 1;
+               mapSize += 8;
             }
             else{
                *mapOut = colors + 1;
                mapOut += 1;
+               mapSize += 8;
             }
             *mapOut = top_colors_start;
             mapOut += 1;
@@ -172,6 +185,7 @@ void mapvxlWriteMap(MapVxl *map, unsigned char *mapOut) {
             mapOut += 1;
             *mapOut = air_start;
             mapOut += 1;
+            mapSize += 24;
 
             for (z=0; z < top_colors_len; ++z) {
                mapvxlWriteColor(&mapOut, map->color[i][j][top_colors_start + z]);
@@ -182,6 +196,7 @@ void mapvxlWriteMap(MapVxl *map, unsigned char *mapOut) {
          }  
       }
    }
+   return mapSize;
 }
 
 unsigned int mapvxlGetColor(MapVxl *map, int x, int y, int z) {

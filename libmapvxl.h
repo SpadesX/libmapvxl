@@ -1,6 +1,8 @@
 #ifndef LIBMAPVXL_H
 #define LIBMAPVXL_H
 
+#include <stddef.h>
+
 #define MAP_X_MAX 512
 #define MAP_Y_MAX MAP_X_MAX
 #define MAP_Z_MAX 64
@@ -14,7 +16,7 @@ typedef struct {
 void mapvxlLoadVXL(MapVxl *map, unsigned char *v);
 unsigned char mapvxlIsSurface(MapVxl *map, int x, int y, int z);
 void mapvxlSetColor(MapVxl *map, int x, int y, int z, unsigned int c);
-void mapvxlWriteMap(MapVxl *map, unsigned char *mapOut);
+size_t mapvxlWriteMap(MapVxl *map, unsigned char *mapOut);
 unsigned int mapvxlGetColor(MapVxl *map, int x, int y, int z);
 void mapvxlSetAir(MapVxl *map, int x, int y, int z);
 unsigned char mapvxlIsSolid(MapVxl *map, int x, int y, int z);
