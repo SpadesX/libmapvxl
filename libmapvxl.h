@@ -3,16 +3,18 @@
 
 #include <stddef.h>
 
-#define MAP_X_MAX 512
-#define MAP_Y_MAX MAP_X_MAX
-#define MAP_Z_MAX 64
 #define DEFAULT_COLOR 0xFF674028
 
 typedef struct {
-    unsigned char blocks[MAP_X_MAX][MAP_Y_MAX][MAP_Z_MAX];
-    unsigned int color[MAP_X_MAX][MAP_Y_MAX][MAP_Z_MAX];
+    unsigned short MAP_X_MAX;
+    unsigned short MAP_Y_MAX;
+    unsigned short MAP_Z_MAX;
+    unsigned char ***blocks;
+    unsigned int ***color;
 } MapVxl;
 
+void mapvxlCreate(MapVxl *map, int maxX, int maxY, int maxZ);
+void mapvxlFree(MapVxl *map);
 void mapvxlLoadVXL(MapVxl *map, unsigned char *v);
 unsigned char mapvxlIsSurface(MapVxl *map, int x, int y, int z);
 void mapvxlSetColor(MapVxl *map, int x, int y, int z, unsigned int c);
