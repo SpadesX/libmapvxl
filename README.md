@@ -4,6 +4,8 @@ A C library for handling the VXL map format. Used primarily in [SpadesX][spadesx
 ## Compilation
 You must have cmake installed to compile the library using the following steps:
 
+> git clone https://github.com/SpadesX/libmapvxl;
+>
 > cd libmapvxl;
 > 
 > cmake -B build;
