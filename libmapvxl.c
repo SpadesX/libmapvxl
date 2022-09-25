@@ -56,7 +56,7 @@ unsigned char mapvxlFindTopBlock(MapVxl *map, int x, int y) {
 
 void mapvxlLoadVXL(MapVxl *map, unsigned char *v) {
     int x,y,z;
-    const unsigned int BLOCK_CLEAR = 0x01000000 | (DEFAULT_COLOR & 0xFF000000);
+    const unsigned int BLOCK_CLEAR = 0x01000000 | (DEFAULT_COLOR & 0x00FFFFFF);
     for (y=0; y < map->MAP_Y_MAX; ++y) {
         for (x=0; x < map->MAP_X_MAX; ++x) {
             for (z=0; z < map->MAP_Z_MAX; ++z) {
