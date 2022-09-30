@@ -205,7 +205,7 @@ size_t mapvxl_write(mapvxl_t* map, uint8_t* out)
 
 uint8_t mapvxl_find_top_block(mapvxl_t* map, uint16_t x, uint16_t y)
 {
-    if (x > map->size_x || y > map->size_y || z > map->size_z) {
+    if (x > map->size_x || y > map->size_y) {
         return 0;
     }
 
