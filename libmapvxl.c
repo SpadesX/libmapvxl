@@ -6,6 +6,7 @@
 
 static inline void _mapvxl_unset_block(mapvxl_t* map, uint16_t x, uint16_t y, uint16_t z)
 {
+    assert(x < map->size_x && y < map->size_y && z < map->size_z);
     map->blocks[x][y][z].data &= ~0x01;
 }
 
@@ -204,7 +205,10 @@ size_t mapvxl_write(mapvxl_t* map, uint8_t* out)
 
 uint8_t mapvxl_find_top_block(mapvxl_t* map, uint16_t x, uint16_t y)
 {
-    assert(x < map->size_x && y < map->size_y);
+    if (x > map->size_x || y > map->size_y || z > map->size_z) {
+        return 0;
+    }
+
     for (uint8_t z = 0; z < map->size_z; ++z) {
         if (map->blocks[x][y][z].data & 0x01) {
             return z;
@@ -236,7 +240,9 @@ void mapvxl_set_air(mapvxl_t* map, uint16_t x, uint16_t y, uint16_t z)
 
 int mapvxl_is_surface(mapvxl_t* map, uint16_t x, uint16_t y, uint16_t z)
 {
-    assert(x < map->size_x && y < map->size_y && z < map->size_z);
+    if (x > map->size_x || y > map->size_y || z > map->size_z) {
+        return 0;
+    }
     if (!_mapvxl_is_solid(map, x, y, z)) {
         return 0;
     }
@@ -266,6 +272,8 @@ int mapvxl_is_surface(mapvxl_t* map, uint16_t x, uint16_t y, uint16_t z)
 
 int mapvxl_is_solid(mapvxl_t* map, uint16_t x, uint16_t y, uint16_t z)
 {
-    assert(x < map->size_x && y < map->size_y && z < map->size_z);
+    if (x > map->size_x || y > map->size_y || z > map->size_z) {
+        return 0;
+    }
     return _mapvxl_is_solid(map, x, y, z);
 }
