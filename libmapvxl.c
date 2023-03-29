@@ -6,7 +6,7 @@
 
 static inline void _mapvxl_unset_block(mapvxl_t* map, uint16_t x, uint16_t y, uint16_t z)
 {
-    if (x < map->size_x && y < map->size_y && z < map->size_z) {
+    if (x > map->size_x || y > map->size_y || z > map->size_z) {
         printf("LIBMAPVXL ERROR: Coordinates X: %d Y: %d Z: %d are out of bounds during block clearing\n", x, y, z);
         assert(1);
     }
@@ -222,7 +222,7 @@ uint8_t mapvxl_find_top_block(mapvxl_t* map, uint16_t x, uint16_t y)
 
 void mapvxl_set_color(mapvxl_t* map, uint16_t x, uint16_t y, uint16_t z, uint32_t c)
 {
-    if (x < map->size_x && y < map->size_y && z < map->size_z) {
+    if (x > map->size_x || y > map->size_y || z > map->size_z) {
         printf("LIBMAPVXL ERROR: Coordinates X: %d Y: %d Z: %d are out of bounds during color set\n", x, y, z);
         assert(1);
     }
@@ -231,7 +231,7 @@ void mapvxl_set_color(mapvxl_t* map, uint16_t x, uint16_t y, uint16_t z, uint32_
 
 uint32_t mapvxl_get_color(mapvxl_t* map, uint16_t x, uint16_t y, uint16_t z)
 {
-    if (x < map->size_x && y < map->size_y && z < map->size_z) {
+    if (x > map->size_x || y > map->size_y || z > map->size_z) {
         printf("LIBMAPVXL ERROR: Coordinates X: %d Y: %d Z: %d are out of bounds during get color\n", x, y, z);
         assert(1);
     }
@@ -243,7 +243,7 @@ uint32_t mapvxl_get_color(mapvxl_t* map, uint16_t x, uint16_t y, uint16_t z)
 
 void mapvxl_set_air(mapvxl_t* map, uint16_t x, uint16_t y, uint16_t z)
 {
-    if (x < map->size_x && y < map->size_y && z < map->size_z) {
+    if (x > map->size_x || y > map->size_y || z > map->size_z) {
         printf("LIBMAPVXL ERROR: Coordinates X: %d Y: %d Z: %d are out of bounds during setting air\n", x, y, z);
         assert(1);
     }
@@ -281,7 +281,7 @@ int mapvxl_is_surface(mapvxl_t* map, uint16_t x, uint16_t y, uint16_t z)
 
 int mapvxl_is_solid(mapvxl_t* map, uint16_t x, uint16_t y, uint16_t z)
 {
-    if (x < map->size_x && y < map->size_y && z < map->size_z) {
+    if (x > map->size_x || y > map->size_y || z > map->size_z) {
         printf("LIBMAPVXL ERROR: Coordinates X: %d Y: %d Z: %d are out of bounds during solid check\n", x, y, z);
         assert(1);
     }
